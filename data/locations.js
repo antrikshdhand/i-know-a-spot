@@ -36,3 +36,34 @@ export const locations = [
 function generateRandomId() {
     return Math.random().toString(36).slice(2, 11); // Simple random ID generator
 }
+
+export function addLocation() {
+    try {
+        const name = document.getElementById('name').value;
+        const latLong = document.getElementById('lat-long').value;
+        const type = document.querySelector('input[name="type"]:checked').value;
+        const description = document.getElementById('description').value;
+        const img = document.getElementById('img').value;
+    } catch (e) {
+        alert("You are missing one or more form entries.");
+        return;
+    }
+
+    const newLocation = {
+        id: generateRandomId(),
+        name: name,
+        latLong: latLong,
+        type: type,
+        description: description,
+        img: img
+    };
+
+    // Add the new location to your existing locations array
+    // locations.push(newLocation);
+
+    // Print the updated locations array
+    console.log(newLocation);
+
+    // Optionally, reset the form after adding a location
+    document.getElementById('new-location-form').reset();
+}

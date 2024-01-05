@@ -1,4 +1,4 @@
-import { locations } from '../data/locations.js'
+import { locations, addLocation } from '../data/locations.js'
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -16,7 +16,10 @@ function initializeMap() {
 
 function addAllLocationsToMap(map) {
     locations.forEach((location) => {
-        const latLong = location.latLong.split(', ');
+        const latLong = location.latLong.split(',');
+        latLong[0] = Number(latLong[0].trim());
+        latLong[1] = Number(latLong[1].trim());
+
         const marker = L.marker(latLong).addTo(map);
         marker.bindPopup(`
             <h2>${location.name}</h2>
@@ -36,13 +39,29 @@ function addAllLocationsToMap(map) {
 let map = initializeMap();
 addAllLocationsToMap(map);
 
+function formatLatLng(latlng) {
+    const lat = latlng.lat.toFixed(5);
+    const lng = latlng.lng.toFixed(5);
+
+    return `${lat}, ${lng}`;
+}
+
+let marker;
 function onMapClick(e) {
-    // When the user clicks on a 
-    let popup = L.popup();
-        popup
-            .setLatLng(e.latlng)
-            // .setContent("You clicked the map at " + e.latlng.toString())
-            .openOn(map);
+    // If a marker already exists, remove it from the map
+    if (marker) {
+        map.removeLayer(marker);
+    }
+
+    // Create a new marker at the clicked location and add it to the map
+    marker = L.marker(e.latlng, {
+        'title': 'New location'
+    }).addTo(map);
+
+    const markerString = formatLatLng(e.latlng);
+    document.getElementById('lat-long').value = markerString;
 }
 
 map.on('click', onMapClick);
+
+document.getElementById('new-location-submit-button').addEventListener('click', addLocation);
