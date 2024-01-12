@@ -20,11 +20,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
 
-console.log(app);
-console.log(auth);
-console.log(database);
-
-
 document.getElementById("register-button").addEventListener('click', register);
 function register() {
     const firstName = document.getElementById('first-name').value;
@@ -43,10 +38,12 @@ function register() {
         return;
     }
 
-    if (!validate_password) {
+    if (!validate_password(password)) {
         alert("Your password must be at least 6 characters long.");
         return;
     }
+
+    document.getElementById('register-form').reset();
 
     createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
@@ -58,6 +55,9 @@ function register() {
                 lastLogin: Date.now()
             }
             set(ref(database, 'users/' + user.uid), userData);
+
+
+            console.log("Successfully registered.");
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -67,9 +67,10 @@ function register() {
         });
 }
 
+document.getElementById("login-button").addEventListener('click', login);
 function login() {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+    const email = document.getElementById('email-login').value;
+    const password = document.getElementById('password-login').value;
 
     if (!validate_field(email) || !validate_field(password)) {
         alert("Missing input fields.");
@@ -87,6 +88,8 @@ function login() {
                 lastLogin: Date.now()
             };
             update(ref(database, 'users/' + user.uid), userData);
+
+            console.log("LOGGED IN SUCCESSFULLY");
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -104,9 +107,9 @@ function validate_email(email) {
 function validate_password(password) {
     if (password.length < 6) {
         return false;
-    } else {
-        return true;
     }
+
+    return true;
 }
 
 function validate_field(field) {
