@@ -1,3 +1,5 @@
+import { addAllLocationsToMap, map } from "../scripts/map.js";
+
 export const locations = [
     {
         id: generateRandomId(),
@@ -44,26 +46,23 @@ export function addLocation() {
         const type = document.querySelector('input[name="type"]:checked').value;
         const description = document.getElementById('description').value;
         const img = document.getElementById('img').value;
+
+        const newLocation = {
+            id: generateRandomId(),
+            name: name,
+            latLong: latLong,
+            type: type,
+            description: description,
+            img: img
+        };
+
+        locations.push(newLocation);
+        addAllLocationsToMap(map);
+
+        document.getElementById('new-location-form').reset();
     } catch (e) {
         alert("You are missing one or more form entries.");
         return;
     }
 
-    const newLocation = {
-        id: generateRandomId(),
-        name: name,
-        latLong: latLong,
-        type: type,
-        description: description,
-        img: img
-    };
-
-    // Add the new location to your existing locations array
-    // locations.push(newLocation);
-
-    // Print the updated locations array
-    console.log(newLocation);
-
-    // Optionally, reset the form after adding a location
-    document.getElementById('new-location-form').reset();
 }

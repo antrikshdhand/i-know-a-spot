@@ -14,7 +14,7 @@ function initializeMap() {
     return map;
 }
 
-function addAllLocationsToMap(map) {
+export function addAllLocationsToMap(map) {
     locations.forEach((location) => {
         const latLong = location.latLong.split(',');
         latLong[0] = Number(latLong[0].trim());
@@ -36,7 +36,7 @@ function addAllLocationsToMap(map) {
     });
 }
 
-let map = initializeMap();
+export const map = initializeMap();
 addAllLocationsToMap(map);
 
 function formatLatLng(latlng) {
