@@ -1,4 +1,20 @@
+import { auth } from './firebase.js'
 import { locations, addLocation } from '../data/locations.js'
+
+function checkLoggedIn() {
+    console.log(auth.currentUser);
+    const user = auth.currentUser;
+    if (user) {
+        console.log("User is logged in:", user.email);
+        // Redirect or show authenticated content here
+    } else {
+        console.log("User is not logged in");
+        // Redirect to login page or show login form
+    }
+}
+
+// Check if a user is logged in after page loads
+document.addEventListener('DOMContentLoaded', checkLoggedIn());
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);

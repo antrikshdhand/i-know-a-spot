@@ -1,9 +1,10 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
-import { ref, set, update} from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
-import { auth, database } from 'firebase.js';
+import { ref, set, update } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
+import { auth, database } from './firebase.js';
 
 document.getElementById("register-button").addEventListener('click', register);
 function register() {
+    console.log("Attemping register");
     const firstName = document.getElementById('first-name').value;
     const lastName = document.getElementById('last-name').value;
     const email = document.getElementById('email').value;
@@ -73,12 +74,15 @@ function login() {
             update(ref(database, 'users/' + user.uid), userData);
 
             console.log("LOGGED IN SUCCESSFULLY");
+            console.log(auth.currentUser);
+            window.location.href = './map.html';
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.log(errorCode);
             console.log(errorMessage);
+            alert("Incorrect email and password combination.");
         });
 }
 

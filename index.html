@@ -1,95 +1,18 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <title>I Know a Spot</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page</title>
 
-  <!-- LEAFLET -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  
-  <!-- FIREBASE -->
-  <script type="module" src="scripts/firebase.js" defer></script>
-
-  <!-- OTHER JS -->
-  <script type="module" src="scripts/map.js" defer></script>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="styles/main.css">
-
+  <link rel="stylesheet" href="styles/index.css" />
 </head>
-
 <body>
-  <h1>I Know a Spot</h1>
-  <h3>View locations below:</h3>
-
-  <!--
-    TODO:
-      - Understand authentication and storing session id in cookies/tokens
-      - Learn what the best way is to store location data inside Firebase
-  -->
-
-  <div id="leaflet-map"></div>
-
-  <div id="add-new-location">
-    <h3>Add a new location using the form below:</h3>
-    <form id="new-location-form">
-      <label for="name">Name:</label><br>
-      <input type="text" id="name" name="name" placeholder="Glenfield Rd hill" required><br>
-
-      <label for="latLong">Latitude and Longitude (click on map above):</label><br>
-      <input type="text" id="lat-long" name="latLong" placeholder="-33.97194, 150.89252" required><br>
-
-      <label>Type of spot:</label><br>
-      <input type="radio" id="sunrise" name="type" value="Sunrise">
-      <label for="sunrise">Sunrise</label>
-      <input type="radio" id="sunset" name="type" value="sunset">
-      <label for="sunset">Sunset</label><br>
-
-      <label for="description">Description:</label><br>
-      <textarea id="description" name="description" rows="4" required></textarea><br>
-
-      <label for="img">Image URL (optional):</label><br>
-      <input type="text" id="img" name="img"><br>
-
-      <button type="button" id="new-location-submit-button">Add Location</button>
-    </form>
+  <div id="logo">
+    <p>iknowaspot</p>
   </div>
-
-  <div id="register">
-    <h3>Register now!</h3>
-    <form id="register-form">
-      <label for="first-name">First name:</label>
-      <input type="text" id="first-name"><br>
-
-      <label for="last-name">Last name:</label>
-      <input type="text" id="last-name"><br>
-
-      <label for="email">Email:</label>
-      <input type="email" id="email"><br>
-
-      <label for="password">Password:</label>
-      <input type="password" id="password"><br>
-
-      <button type="button" id="register-button">Register</button>
-    </form>
+  <div id="login-link">
+    <p><a href="login.html">Log In/Register</a></p>
   </div>
-
-  <div id="login">
-    <h3>Log In</h3>
-    <form id="login-form">
-      <label for="email">Email:</label>
-      <input type="email" id="email-login"><br>
-
-      <label for="password">Password:</label>
-      <input type="password" id="password-login"><br>
-
-      <button type="button" id="login-button">Login</button>
-    </form>
-  </div>
-
 </body>
-
 </html>
